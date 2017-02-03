@@ -39,7 +39,7 @@ public class Game {
             if (row > 8 || col > 8 || row < 0 || col < 0) {
                 System.out.println("Try again");
             } else if (map.board[row][col].isFlagged()) {
-                System.out.println("This place has been flagged. Would you like to unflag it?");
+                System.out.println("This place has been flagged. Would you like to unflag it? (Y/N)");
                 scan = new Scanner(System.in);
                 choice = scan.nextLine().toUpperCase();
                 if (choice.equals("Y")) {
@@ -68,11 +68,12 @@ public class Game {
                     Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                map.board[row][col].setFlipped(true);
                 map.detectZeroes(row, col);
+                map.board[row][col].setFlipped(true);
             }
             if (map.checkWin()) {
                 System.out.println("You won!");
+                map.flipAll();
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {

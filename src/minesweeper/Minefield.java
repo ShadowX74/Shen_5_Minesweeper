@@ -158,7 +158,6 @@ public class Minefield {
         if (!(x < 0 || x > w - 1 || y < 0 || y > h - 1)) {
             if (board[y][x].getValue() == 0 && !board[y][x].isFlipped()) {
                 board[y][x].setFlipped(true);
-                //board[y][x].flagged = false;
                 detectZeroes(y + 1, x);
                 detectZeroes(y + 1, x + 1);
                 detectZeroes(y + 1, x - 1);
@@ -237,6 +236,14 @@ public class Minefield {
                 if (n.isMined()) {
                     n.setFlipped(true);
                 }
+            }
+        }
+    }
+    
+    public void flipAll() {
+        for (Node[] row : board) { //Iterating through all the nodes
+            for (Node n : row) {
+                n.setFlipped(true);
             }
         }
     }
